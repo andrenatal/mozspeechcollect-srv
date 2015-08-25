@@ -24,6 +24,6 @@ bs.on('connection', function(client){
 //
 //
 
-server.listen(9000);
+server.listen(80);
 console.log('HTTP and BinaryJS server started on port 9000');
 
