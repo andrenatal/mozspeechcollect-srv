@@ -5,11 +5,11 @@ var http = require('http');
 var express = require('express');
 var app = express();
 app.use(express.static(__dirname + '/public'));
-
+var port = process.env.PORT || 5000;
 var server = http.createServer(app);
 
 // Start Binary.js server
-var BinaryServer = require('binaryjs').BinaryServer({port: 9000});
+var BinaryServer = require('binaryjs').BinaryServer;
 var bs = BinaryServer({server: server});
 
 // Wait for new user connections
@@ -24,6 +24,6 @@ bs.on('connection', function(client){
 //
 //
 
-//server.listen(9000);
+server.listen(80);
 console.log('HTTP and BinaryJS server started on port 9000');
 
