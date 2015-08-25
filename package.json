@@ -1,6 +1,6 @@
 {
   "name": "mozspeechserver",
-  "version": "0.1",
+  "version": "0.1.5",
   "description": "Moz speech server",
   "scripts": {
     "start": "node server.js"
@@ -14,6 +14,6 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/andrenatal/voicedialer-gaia"
+    "url": "https://github.com/andrenatal/speechsrv"
   }
 }
