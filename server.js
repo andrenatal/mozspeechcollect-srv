@@ -9,7 +9,7 @@ app.use(express.static(__dirname + '/public'));
 var server = http.createServer(app);
 
 // Start Binary.js server
-var BinaryServer = require('binaryjs').BinaryServer;
+var BinaryServer = require('binaryjs').BinaryServer({port: 9000});
 var bs = BinaryServer({server: server});
 
 // Wait for new user connections
@@ -24,6 +24,6 @@ bs.on('connection', function(client){
 //
 //
 
-server.listen(9000);
+//server.listen(9000);
 console.log('HTTP and BinaryJS server started on port 9000');
 
