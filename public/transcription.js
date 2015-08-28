@@ -1,4 +1,4 @@
-var client = new BinaryClient('ws://192.168.1.102:9000');
+var client = new BinaryClient('ws://speechan.cloudapp.net:9000');
 var offline = true;
 var txtname = "";
 var audiofile = "";
