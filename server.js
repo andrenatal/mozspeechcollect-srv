@@ -31,15 +31,13 @@ bs.on('connection', function(client){
 			  		var filename = files[i];
 
 			  		if (!fs.existsSync(__dirname+ '/public/' + path)){
-				  			console.log("not exists: " + __dirname+ '/public/' + path);
-				  			console.log("send next" + filename);
 				  			stream.write({next: filename, n: "ok"});
 				  			hasfiles = true;
 			  		}
 			  	}
 			  }
 			  if (!hasfiles){
-				console.log("send nok too" + hasfiles);
+				console.log("send nok - finished" + hasfiles);
   				stream.write({n: "nok"});
   			  }
 			});
