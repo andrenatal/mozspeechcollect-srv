@@ -1,17 +1,32 @@
 <html>
-<head></head>
-<script>
+<head>
+  <script src="binary.js"></script>
+</head>
 
-
-
-
-</script>
 <body>
-aaa
+  <script src="transcription.js"></script>  
 
-<audio controls="true" url="http://127.0.0.1:9000/1440718251165audio.opus"></audio>
+	<center>
+		<h1> MozSpeech Transcriptor </h1>
+
+		<p><h2> 1. Pull next audio on queue </h2></p> 
+		<input id="nextbutton" type="button" style="width:250px; height:40px" value="Next"/>		
+
+		<p><h2> 2. Listen to the audio </h2></p> 
+		<audio id="audioel" controls="true" src=""></audio>
+		<br><br>
 
 
+		<p><h2> 3. Write its transcription in this field </h2></p> 
+		<input id="transcription" type="text" style="width:250px; height:40px" value=""/>
+
+
+		<p><h2> 4. Submit it to us</h2></p> 
+		<input id="sendbutton" type="button" style="width:250px; height:40px" value="Submit"/>
+
+		<p id="thankyou" style="font-size: x-large;"></p>
+
+	</center>
 
 </body>
 </html>
