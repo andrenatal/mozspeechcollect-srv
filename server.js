@@ -39,7 +39,7 @@ bs.on('connection', function(client){
 			  				if (hasfiles)
 			  					continue;
 
-					  		var textasr = files[i].replace("audio.wav","asr.txt");
+					  		var textasr = files[i].replace("audio.wav","word.txt");
 							var asr = fs.readFileSync(__dirname+ '/public/' + textasr).toString();
 							console.log(asr + " - " + textasr);
 				  			stream.write({next: filename, n: "ok", asr: asr});
