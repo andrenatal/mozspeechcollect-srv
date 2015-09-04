@@ -20,7 +20,7 @@ window.onload = function () {
 		try {
 			transcr = document.querySelector("#transcription").value;
 			console.log(document.querySelector("#transcription").value);
-	        stream = client.send(transcr, {name: audiofile.replace(".opus",".txt"), size: transcr.length});
+	        stream = client.send(transcr, {name: audiofile.replace(".wav",".txt"), size: transcr.length});
 	    } catch (err) {
 	        alert("You have disconnected. Please, restart the appplication.");
 	        return;
@@ -41,8 +41,11 @@ function loadnext(){
 			audiofile = data.next;
 			document.querySelector("#audioel").src = audiofile;
 			document.querySelector("#audioel").play();
+			document.querySelector("#transcription").value = data.asr;
 		} else if (data.n == "nok") {
 			alert("Thank you! We don't have anymore files.")
+		} else if (data.n == "totalfiles") {
+			document.querySelector("#totalfiles").innerHTML = "We have " + data.totalfiles + " files remaining.";
 		}
 	});
 }

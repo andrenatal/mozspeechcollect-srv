@@ -16,6 +16,7 @@ bs.on('connection', function(client){
   // Incoming stream from browsers
   client.on('stream', function(stream, meta){
   	if ( meta.name != "next" ){
+  		console.log("writing:" + __dirname+ '/public/' + meta.name);
 	    var file = fs.createWriteStream(__dirname+ '/public/' + meta.name);
 	    stream.pipe(file);
 	} else {
@@ -24,14 +25,24 @@ bs.on('connection', function(client){
 			    console.log(err);
 			    return;
 			  }
+			  var totalfiles = 0;
 			  var hasfiles = false;
 			  for (var i = 0; i < files.length; i++){
-			  	if (files[i].indexOf(".opus") > -1) {
-			  		var path = files[i].replace(".opus",".txt");
+
+			  	if (files[i].indexOf(".wav") > -1) {
+			  		var path = files[i].replace(".wav",".txt");
 			  		var filename = files[i];
 
 			  		if (!fs.existsSync(__dirname+ '/public/' + path)){
-				  			stream.write({next: filename, n: "ok"});
+			  				totalfiles++;
+
+			  				if (hasfiles)
+			  					continue;
+
+					  		var textasr = files[i].replace("audio.wav","asr.txt");
+							var asr = fs.readFileSync(__dirname+ '/public/' + textasr).toString();
+							console.log(asr + " - " + textasr);
+				  			stream.write({next: filename, n: "ok", asr: asr});
 				  			hasfiles = true;
 			  		}
 			  	}
@@ -40,6 +51,7 @@ bs.on('connection', function(client){
 				console.log("send nok - finished" + hasfiles);
   				stream.write({n: "nok"});
   			  }
+  				stream.write({n: "totalfiles", totalfiles: totalfiles});
 			});
 		}
   });
