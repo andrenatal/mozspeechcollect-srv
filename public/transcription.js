@@ -1,4 +1,4 @@
-var client = new BinaryClient('ws://speechan.cloudapp.net:9000');
+var client = new BinaryClient('ws://'+window.content.location.host);
 var offline = true;
 var txtname = "";
 var audiofile = "";
@@ -19,6 +19,18 @@ window.onload = function () {
 	document.querySelector("#sendbutton").onclick = function (){
 		try {
 			transcr = document.querySelector("#transcription").value;
+			console.log(document.querySelector("#transcription").value);
+	        stream = client.send(transcr, {name: audiofile.replace(".wav",".txt"), size: transcr.length});
+	    } catch (err) {
+	        alert("You have disconnected. Please, restart the appplication.");
+	        return;
+    	}
+		document.querySelector("#thankyou").innerHTML = "Thank you! Now please start it over from step 1.";
+	}
+
+	document.querySelector("#discardbutton").onclick = function (){
+		try {
+			transcr = "XXXXXX";
 			console.log(document.querySelector("#transcription").value);
 	        stream = client.send(transcr, {name: audiofile.replace(".wav",".txt"), size: transcr.length});
 	    } catch (err) {
