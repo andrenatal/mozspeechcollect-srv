@@ -1,7 +1,7 @@
 var client = new BinaryClient('ws://'+window.content.location.host);
 var offline = true;
 var txtname = "";
-var audiofile = "";
+var audiofile = null;
 
 
 // Wait for connection to BinaryJS server
@@ -17,10 +17,17 @@ client.on('error', function(){
 
 window.onload = function () {
 	document.querySelector("#sendbutton").onclick = function (){
+
+		if (audiofile == null){
+			alert("Please, select an audio file.")
+			return;
+		}
+
 		try {
 			transcr = document.querySelector("#transcription").value;
 			console.log(document.querySelector("#transcription").value);
 	        stream = client.send(transcr, {name: audiofile.replace(".wav",".txt"), size: transcr.length});
+	        audiofile = null;
 	    } catch (err) {
 	        alert("You have disconnected. Please, restart the appplication.");
 	        return;
@@ -29,10 +36,16 @@ window.onload = function () {
 	}
 
 	document.querySelector("#discardbutton").onclick = function (){
+		if (audiofile == null){
+			alert("Please, select an audio file.")
+			return;
+		}
+
 		try {
 			transcr = "XXXXXX";
 			console.log(document.querySelector("#transcription").value);
 	        stream = client.send(transcr, {name: audiofile.replace(".wav",".txt"), size: transcr.length});
+	        audiofile = null;
 	    } catch (err) {
 	        alert("You have disconnected. Please, restart the appplication.");
 	        return;
